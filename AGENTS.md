@@ -33,17 +33,16 @@ skills/<skill>/
    read the per-criterion breakdown, tighten `SKILL.md`, re-run. Use
    `--runs 3` to gauge variance before trusting a change.
 5. **Commit** — use the [commit](./skills/commit/SKILL.md) skill. Conventional Commits;
-   atomic commits; group a `SKILL.md` change with its `plugin.json` version bump.
-6. **Publish** — `tessl skill publish ./<skill> --bump <patch|minor|major>`
-   (auto-runs lint + review and records the score in the registry). `--dry-run`
-   first. Choose the bump from the changes since the last publish, following
-   semver — which maps directly from the Conventional Commit types in those
-   commits:
-   - **patch** — only `fix:` / `perf:` / `chore:` / `docs:` (backward-compatible fixes)
-   - **minor** — any `feat:` (new backward-compatible behaviour)
-   - **major** — any `!` / `BREAKING CHANGE:` (breaking change)
-
-   When in doubt, the highest-impact change in the range wins.
+   atomic commits.
+6. **Push** — versioning and publishing are automatic (see below). On push to
+   `main`, once the gates pass, CI **patch-bumps** any skill whose published
+   content changed and publishes it. You only touch the version yourself for a
+   **minor** or **major** release — bump `plugin.json` in your commit and CI
+   treats it as deliberate (no auto-bump on top). Follow semver, which maps from
+   the Conventional Commit types:
+   - **patch** (automatic) — `fix:` / `perf:` / `docs:` etc.; just push.
+   - **minor** — any `feat:`; bump the middle version in the commit.
+   - **major** — any `!` / `BREAKING CHANGE:`; bump the major version in the commit.
 
 ## Quality gates
 
@@ -71,6 +70,24 @@ Tune thresholds via env vars: `TESSL_REVIEW_THRESHOLD`, `TESSL_EVAL_FLOOR`,
 `TESSL_OPTIMISE_MAX_ITERATIONS`.
 
 Bypass the hook only when genuinely necessary: `git commit --no-verify`.
+
+## Publishing
+
+After the gates pass, the CI `publish` job (`scripts/tessl-publish.sh`) auto-bumps
+and publishes:
+
+- A change to a skill's **published content** (anything under `skills/<skill>/`
+  except `evals/`) triggers a **patch** bump, committed back as
+  `chore: … [skip ci]` and pushed. Editing only `evals/` does **not** bump or
+  publish.
+- If the commit already changed the `version` field, that is taken as a manual
+  bump (for minor/major) and left as-is.
+- Each skill is then reconciled with the registry: repo version ahead →
+  `tessl skill publish`; equal → nothing; **registry ahead → the job fails**
+  (version drift that needs attention).
+
+The bump commit can't loop: CI's `GITHUB_TOKEN` pushes don't trigger new runs,
+and the commit carries `[skip ci]`. Do not publish manually.
 
 ## Setup
 

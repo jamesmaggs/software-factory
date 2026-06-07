@@ -43,3 +43,41 @@ jobs:
 
       - name: Eval gate (scenario evals)
         run: bash scripts/tessl-eval-gate.sh
+
+  # Auto-bump changed skills and publish those ahead of the registry. Runs only
+  # after the gates pass, on push to main. CI's GITHUB_TOKEN pushes don't trigger
+  # new runs (and the bump commit carries [skip ci]), so this cannot loop.
+  publish:
+    needs: gates
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      TESSL_TOKEN: ${{ secrets.TESSL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Install tessl CLI
+        run: npm install -g @tessl/cli
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Auto-bump and publish changed skills
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: bash scripts/tessl-publish.sh
