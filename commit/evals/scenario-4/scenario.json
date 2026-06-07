@@ -1,0 +1,1 @@
+{ "description": "Pre-commit hook failure and recovery", "include": ["./inputs"] }
