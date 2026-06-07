@@ -5,16 +5,17 @@ Operational guide for agents working in this repository.
 ## What this repo is
 
 A collection of [agent skills](https://agentskills.io/specification), each
-packaged as a [tessl](https://docs.tessl.io) plugin. Every skill lives in its
-own directory:
+packaged as a [tessl](https://docs.tessl.io) plugin under `skills/`:
 
 ```
-<skill>/
+skills/<skill>/
 ├── .tessl-plugin/plugin.json   # name (engineering/<skill>), version, description
 ├── SKILL.md                    # the skill itself: frontmatter + instructions
 └── evals/
     └── scenario-N/             # scenario evals (task.md, criteria.json, scenario.json)
 ```
+
+(`scripts/` holds the quality-gate tooling; skill plugins live under `skills/`.)
 
 `tessl.json` marks the repo as a vendored tessl project (`engineering/software-factory`);
 `.mcp.json` registers the tessl MCP server.
@@ -27,11 +28,11 @@ own directory:
    It rewrites `SKILL.md` in place; **review the diff** before committing.
 3. **Add evals** — `tessl scenario generate ./<skill> --count 5` then
    `tessl scenario download --last --output ./<skill>/evals`, or author them by hand
-   (see existing `commit/evals/` for the format).
+   (see existing `skills/commit/evals/` for the format).
 4. **Iterate on evals** — `tessl eval run ./<skill>` → `tessl eval view --last`;
    read the per-criterion breakdown, tighten `SKILL.md`, re-run. Use
    `--runs 3` to gauge variance before trusting a change.
-5. **Commit** — use the [commit](./commit/SKILL.md) skill. Conventional Commits;
+5. **Commit** — use the [commit](./skills/commit/SKILL.md) skill. Conventional Commits;
    atomic commits; group a `SKILL.md` change with its `plugin.json` version bump.
 6. **Publish** — `tessl skill publish ./<skill> --bump <patch|minor|major>`
    (auto-runs lint + review and records the score in the registry). `--dry-run`
@@ -62,7 +63,7 @@ CI, not in the pre-commit hook. The eval gate scores the **with-skill** variant
 Run gates manually:
 
 ```sh
-scripts/tessl-review-gate.sh            # all plugins (or pass dirs: ./commit)
+scripts/tessl-review-gate.sh            # all plugins (or pass dirs: ./skills/commit)
 scripts/tessl-eval-gate.sh              # all plugins with evals/ (slow)
 ```
 

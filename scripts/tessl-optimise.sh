@@ -6,7 +6,7 @@
 #
 # Usage:
 #   scripts/tessl-optimise.sh                 # all plugins
-#   scripts/tessl-optimise.sh ./commit        # one plugin
+#   scripts/tessl-optimise.sh ./skills/commit  # one plugin
 set -euo pipefail
 
 THRESHOLD="${TESSL_REVIEW_THRESHOLD:-90}"

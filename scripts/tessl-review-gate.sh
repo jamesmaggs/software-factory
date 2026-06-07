@@ -4,7 +4,7 @@
 #
 # Usage:
 #   scripts/tessl-review-gate.sh                 # all plugins in the repo
-#   scripts/tessl-review-gate.sh ./commit ./foo  # only the named plugin dirs
+#   scripts/tessl-review-gate.sh ./skills/commit  # only the named plugin dirs
 set -euo pipefail
 
 THRESHOLD="${TESSL_REVIEW_THRESHOLD:-90}"
