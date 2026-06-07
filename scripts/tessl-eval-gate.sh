@@ -12,9 +12,7 @@
 set -euo pipefail
 
 FLOOR="${TESSL_EVAL_FLOOR:-80}"
-# Pin the agent: the eval default model drifts (e.g. to GLM), and the gate
-# should measure the skill against a known, consistent agent.
-AGENT="${TESSL_EVAL_AGENT:-claude:claude-sonnet-4-6}"
+AGENT="${TESSL_EVAL_AGENT:-claude:glm-5.1}"
 POLL_INTERVAL="${TESSL_EVAL_POLL_INTERVAL:-15}"
 POLL_MAX="${TESSL_EVAL_POLL_MAX:-80}"   # 80 * 15s = up to 20 min per plugin
 here="$(cd "$(dirname "$0")" && pwd)"
