@@ -1,5 +1,5 @@
 {
   "name": "engineering/software-factory",
-  "mode": "vendored",
+  "mode": "managed",
   "dependencies": {}
 }
