@@ -1,0 +1,45 @@
+name: tessl gates
+
+# Trunk-based: gate every push to main. The review gate is fast; the eval gate
+# runs real agents in the cloud (minutes) and is the reason this lives in CI
+# rather than in the pre-commit hook.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: tessl-gates-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    env:
+      # Workspace API token — create with `tessl api-key create` and store it
+      # as the TESSL_TOKEN repository secret.
+      TESSL_TOKEN: ${{ secrets.TESSL_TOKEN }}
+      TESSL_REVIEW_THRESHOLD: "90"
+      TESSL_EVAL_FLOOR: "80"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install tessl CLI
+        run: npm install -g @tessl/cli
+
+      - name: Verify authentication
+        run: tessl whoami
+
+      - name: Review gate (lint + skill review)
+        run: bash scripts/tessl-review-gate.sh
+
+      - name: Eval gate (scenario evals)
+        run: bash scripts/tessl-eval-gate.sh
