@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Analyzes git diffs, stages changes, and generates descriptive commit messages following Conventional Commits format (feat, fix, chore, etc.), categorizing changes by type and scope. Use this skill whenever the user says "commit", "make a commit", "commit my changes", "commit this", "stage and commit", or anything that indicates they want to record the current state of the working tree in git.
+description: Analyzes git diffs, stages changes, and generates descriptive commit messages following Conventional Commits format (feat, fix, chore, etc.), categorizing changes by type and scope. Splits unrelated changes into small atomic commits and groups semantically-coupled changes (e.g. code with its tests). Use this skill whenever the user says "commit", "make a commit", "commit my changes", "commit this", "stage and commit", or anything that indicates they want to record the current state of the working tree in git.
 allowed-tools: Bash
 license: MIT
 compatibility: Requires git.
@@ -21,13 +21,24 @@ Run these in parallel:
 
 If `git status` shows nothing to commit, tell the user and stop — don't create an empty commit.
 
-### Step 2: Decide what to stage
+### Step 2: Plan atomic commits
 
-Stage files that belong together as a logical unit. Prefer naming specific files over `git add .` to avoid accidentally including unrelated changes, secrets, or build artefacts. If the working tree contains clearly unrelated changes, stage only the relevant subset and note to the user what was left unstaged.
+Default to **small, atomic commits**: each commit captures exactly **one semantic change** — a single fix, feature, refactor or decision.
 
-### Step 3: Compose the commit message
+When the working tree mixes several unrelated changes, **split them into separate commits** rather than bundling them. Conversely, **group changes that are only meaningful together** into one commit:
 
-Write a message following the [Conventional Commits](https://www.conventionalcommits.org) specification:
+- code and the tests that exercise it,
+- an API change and the call sites updated in lockstep,
+- a change and the lockfile or generated output it produces,
+- a renamed or moved file and the references updated to point at it.
+
+Decide with this test: *would splitting these leave a commit that can't build or pass on its own, or that is meaningless without the other?* If yes, keep them together; otherwise prefer the smaller commit.
+
+Produce an ordered plan — for each commit, the specific files it includes and a one-line message. When there is more than one commit, order them so any prerequisite lands first (the referenced thing before the referencer), and briefly tell the user the plan.
+
+### Step 3: Compose each commit message
+
+For every planned commit, write a [Conventional Commits](https://www.conventionalcommits.org) message:
 
 ```
 <type>[(scope)][!]: <description>
@@ -37,15 +48,13 @@ Write a message following the [Conventional Commits](https://www.conventionalcom
 [footer]
 ```
 
-#### Subject line
-
-- *type* — `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, or `revert`.
-- *scope* (optional) — the module or component affected. Omit when the change spans the whole repository.
-- *!* (optional) — marks a breaking change directly before the `:`.
-- *description* — short, lowercase, imperative mood (e.g., "add feature" not "added feature"), no trailing period, ≤72 characters.
+- *type*: `feat`, `fix`, `perf`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, `revert`.
+- *scope* (optional): module affected; omit for repo-wide changes.
+- *!* before the `:` marks a breaking change.
+- *description*: lowercase, imperative, no trailing period, ≤72 characters.
 
 ### Step 4: Execute
 
-Stage the files chosen in Step 2, then commit with the message composed in Step 3. Pass the message via a heredoc to preserve formatting.
+Work through the planned commits in order. For each: stage **only that commit's specific files** (prefer naming files over `git add .`, to avoid sweeping in unrelated changes, secrets or build artefacts), then commit with its message via a heredoc to preserve formatting.
 
 If a pre-commit hook fails, the commit did NOT happen — fix the underlying issue, re-stage, and create a **new** commit. Never use `--amend` after a hook failure, as that would modify the previous commit rather than recording the new changes.

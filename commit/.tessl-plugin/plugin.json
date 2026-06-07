@@ -1,9 +1,9 @@
 {
   "name": "engineering/commit",
-  "description": "Analyzes git diffs, stages changes, and generates descriptive commit messages following Conventional Commits format (feat, fix, chore, etc.), categorizing changes by type and scope. Use this skill whenever the user says \"commit\", \"make a commit\", \"commit my changes\", \"commit this\", \"stage and commit\", or anything that indicates they want to record the current state of the working tree in git.",
+  "description": "Analyzes git diffs, stages changes, and generates descriptive commit messages following Conventional Commits format (feat, fix, chore, etc.), categorizing changes by type and scope. Splits unrelated changes into small atomic commits and groups semantically-coupled changes (e.g. code with its tests). Use this skill whenever the user says \"commit\", \"make a commit\", \"commit my changes\", \"commit this\", \"stage and commit\", or anything that indicates they want to record the current state of the working tree in git.",
   "private": true,
   "skills": [
     "."
   ],
-  "version": "0.1.2"
+  "version": "0.2.0"
 }
