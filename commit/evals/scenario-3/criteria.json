@@ -1,0 +1,61 @@
+{
+  "context": "The agent must commit a cross-cutting rename (makeRequest -> sendRequest across 5 files) and a small unrelated typo fix in a TypeScript project. This tests whether the agent groups semantically coupled changes together, separates truly unrelated changes into distinct commits, uses Conventional Commits format correctly, checks git log for the repo's existing commit style, stages specific files rather than using git add ., and documents commits in commit-summary.md.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "Rename grouped in one commit",
+      "description": "All five renamed files (src/client.ts, src/index.ts, src/middleware.ts, src/retry.ts, examples/basic.ts) appear in the same commit — not spread across multiple commits",
+      "max_score": 14
+    },
+    {
+      "name": "Typo fix is separate commit",
+      "description": "The utils.ts typo fix is in a different commit from the rename changes",
+      "max_score": 12
+    },
+    {
+      "name": "Conventional Commits type prefix",
+      "description": "Every commit subject starts with a valid type (feat, fix, perf, docs, refactor, test, build, ci, chore, revert) followed by optional scope and colon",
+      "max_score": 12
+    },
+    {
+      "name": "Rename commit uses refactor type",
+      "description": "The commit containing the makeRequest->sendRequest rename uses the 'refactor' type (not 'feat' or 'chore'), since it is a non-functional rename",
+      "max_score": 10
+    },
+    {
+      "name": "Typo fix uses fix or docs type",
+      "description": "The commit for the utils.ts comment typo fix uses 'fix' or 'docs' type",
+      "max_score": 8
+    },
+    {
+      "name": "Lowercase imperative description",
+      "description": "All commit message subject descriptions start with a lowercase letter and use imperative mood (e.g. 'rename', 'fix', not 'Renamed', 'Fixed')",
+      "max_score": 8
+    },
+    {
+      "name": "No trailing period",
+      "description": "No commit message subject line ends with a period",
+      "max_score": 6
+    },
+    {
+      "name": "Description ≤72 chars",
+      "description": "Every commit message subject line is 72 characters or fewer",
+      "max_score": 6
+    },
+    {
+      "name": "Specific files staged",
+      "description": "commit-summary.md lists individual named files per commit entry (not a catch-all like 'all files'), indicating specific file staging rather than git add .",
+      "max_score": 8
+    },
+    {
+      "name": "Prerequisite ordering",
+      "description": "In commit-summary.md, the rename commit (touching src/client.ts) appears before the typo-fix commit, OR they are independent and either order is acceptable — the point is that the rename is not split such that callers are updated before the definition",
+      "max_score": 8
+    },
+    {
+      "name": "commit-summary.md created",
+      "description": "A file named commit-summary.md exists inside the fetchkit/ repository created by setup.sh and contains at least two sections documenting the commits made (hash, subject, files)",
+      "max_score": 8
+    }
+  ]
+}
