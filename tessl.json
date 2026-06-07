@@ -1,5 +1,9 @@
 {
   "name": "engineering/software-factory",
   "mode": "managed",
-  "dependencies": {}
+  "dependencies": {
+    "engineering/commit": {
+      "version": "0.2.0"
+    }
+  }
 }
