@@ -69,8 +69,6 @@ scripts/tessl-eval-gate.sh              # all plugins with evals/ (slow)
 Tune thresholds via env vars: `TESSL_REVIEW_THRESHOLD`, `TESSL_EVAL_FLOOR`,
 `TESSL_OPTIMISE_MAX_ITERATIONS`.
 
-Bypass the hook only when genuinely necessary: `git commit --no-verify`.
-
 ## Publishing
 
 After the gates pass, the CI `publish` job (`scripts/tessl-publish.sh`) auto-bumps
