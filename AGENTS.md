@@ -22,7 +22,9 @@ skills/<skill>/
 
 ## Skill development lifecycle
 
-1. **Create** — `tessl skill new --workspace engineering`
+1. **Create** — `tessl skill new --workspace engineering`. Add the skill to the
+   [README](./README.md) Skills table (one row, matching the existing format),
+   and keep that table in sync whenever a skill is renamed or removed.
 2. **Optimise** — `scripts/tessl-optimise.sh ./<skill>` runs tessl's automated
    review-and-rewrite loop until the review score reaches the threshold.
    It rewrites `SKILL.md` in place; **review the diff** before committing.
