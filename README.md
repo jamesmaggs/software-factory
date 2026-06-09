@@ -1,6 +1,6 @@
 # Software Factory
 
-A personal collection of [agent skills](https://agentskills.io/specification) for harness engineering.
+A personal collection of harness-engineering skills for [Claude Code](https://claude.com/claude-code), authored to the portable [Agent Skills](https://agentskills.io/specification) spec.
 
 ## Skills
 
