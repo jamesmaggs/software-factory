@@ -6,8 +6,3 @@
 
 # Claude
 .claude/settings.local.json
-
-# Tessl-managed skills.
-.tessl/
-.agents/
-.claude/skills/

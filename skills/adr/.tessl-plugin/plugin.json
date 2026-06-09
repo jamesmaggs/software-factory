@@ -1,9 +1,0 @@
-{
-  "name": "engineering/adr",
-  "description": "Captures Architecture Decision Records (ADRs) in the streamlined MADR format — locates or creates the ADR directory, numbers and writes a new record (Context and drivers, Considered options, Decision, Consequences), maintains the README index, supersedes earlier records, and transitions their status. Use this skill whenever the user wants to record or capture an architectural or technical decision, write an ADR, add a decision record, supersede or deprecate an existing ADR, or mark one accepted.",
-  "private": true,
-  "skills": [
-    "."
-  ],
-  "version": "0.1.0"
-}
