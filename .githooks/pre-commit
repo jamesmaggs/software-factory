@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Lint every SKILL.md against the Agent Skills spec before each commit.
+# Deterministic and offline — if it can't run, stop and investigate; don't bypass.
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+echo "pre-commit: linting skills…"
+exec python3 "$repo_root/scripts/lint-skills.py"
