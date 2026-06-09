@@ -1,0 +1,21 @@
+name: lint skills
+
+# Backstop for the local pre-commit hook: lint every SKILL.md against the
+# Agent Skills spec on push to main. Deterministic and offline — no secrets.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Lint SKILL.md files
+        run: python3 scripts/lint-skills.py
