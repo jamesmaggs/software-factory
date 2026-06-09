@@ -1,0 +1,19 @@
+{
+  "name": "software-factory",
+  "description": "Harness-engineering skills for Claude Code.",
+  "owner": {
+    "name": "James Maggs"
+  },
+  "plugins": [
+    {
+      "name": "adr",
+      "source": "./skills/adr",
+      "description": "Author Architecture Decision Records (ADRs) in the MADR format."
+    },
+    {
+      "name": "commit",
+      "source": "./skills/commit",
+      "description": "Stage and commit changes using Conventional Commits."
+    }
+  ]
+}
