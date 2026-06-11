@@ -23,6 +23,27 @@ KNOWN_KEYS = {"name", "description", "license", "compatibility", "metadata", "al
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
 
+def _use_color():
+    """Colour on a TTY or in GitHub Actions (renders ANSI); off when NO_COLOR is set."""
+    if os.environ.get("NO_COLOR"):
+        return False
+    if os.environ.get("FORCE_COLOR") or os.environ.get("GITHUB_ACTIONS"):
+        return True
+    return sys.stdout.isatty()
+
+
+_COLOR = _use_color()
+
+
+def _c(code, text):
+    return f"\033[{code}m{text}\033[0m" if _COLOR else text
+
+
+PASS = _c("32", "✓")   # green check
+FAIL = _c("31", "✘")   # red cross
+WARN = _c("33", "⚠")   # yellow warning
+
+
 def split_frontmatter(text):
     """Return (frontmatter_lines, body, error)."""
     lines = text.split("\n")
@@ -142,19 +163,19 @@ def main(argv):
     for skill_md in targets:
         errors, warnings = lint_skill(skill_md)
         for w in warnings:
-            print(f"  ⚠ {skill_md}: {w}")
+            print(f"  {WARN} {skill_md}: {w}")
         if errors:
             failed += 1
             for e in errors:
-                print(f"  ✘ {skill_md}: {e}")
+                print(f"  {FAIL} {skill_md}: {e}")
         else:
-            print(f"  ✓ {skill_md}")
+            print(f"  {PASS} {skill_md}")
 
     print()
     if failed:
-        print(f"✘ {failed} of {len(targets)} skill(s) failed the lint")
+        print(f"{FAIL} " + _c("31", f"{failed} of {len(targets)} skill(s) failed the lint"))
         return 1
-    print(f"✓ all {len(targets)} skill(s) pass the Agent Skills structural lint")
+    print(f"{PASS} " + _c("32", f"all {len(targets)} skill(s) pass the Agent Skills structural lint"))
     return 0
 
 
