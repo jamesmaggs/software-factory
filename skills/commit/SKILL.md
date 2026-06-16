@@ -53,6 +53,8 @@ For every planned commit, write a [Conventional Commits](https://www.conventiona
 - *!* before the `:` marks a breaking change.
 - *description*: lowercase, imperative, no trailing period, ≤72 characters.
 
+Always include the current model as a co-author using the name from your system prompt (e.g. `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`, not just "Claude").
+
 ### Step 4: Execute
 
 Work through the planned commits in order. For each: stage **only that commit's specific files** (prefer naming files over `git add .`, to avoid sweeping in unrelated changes, secrets or build artefacts), then commit with its message via a heredoc to preserve formatting.

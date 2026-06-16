@@ -5,7 +5,7 @@
     {
       "id": 1,
       "prompt": "Run breaking-change/setup.sh from the repository root to create a git repo called sdk/, then work inside it. It maintains a client SDK for an internal REST API; the authenticate() function now requires an explicit region parameter that did not exist before, so any downstream caller using the old signature will break. The change and its updated tests are already in the working tree. Commit everything as a single well-described commit that clearly signals to consumers that this release is not backwards compatible. Afterwards, write a commit_log.md recording the staging command(s) you ran and the complete commit message (including body/footer).",
-      "expected_output": "A single Conventional Commits commit marked as a breaking change (! plus a BREAKING CHANGE footer), staging both the source and test files, documented in commit_log.md.",
+      "expected_output": "A single Conventional Commits commit marked as a breaking change (! plus a BREAKING CHANGE footer), staging both the source and test files, crediting the model via a Co-Authored-By trailer, documented in commit_log.md.",
       "files": ["evals/files/breaking-change"],
       "expectations": [
         "The commit subject contains '!' immediately before the colon (e.g. 'feat(auth)!:') to signal a breaking change",
@@ -13,7 +13,8 @@
         "The subject description is lowercase, imperative mood, has no trailing period, and is 72 characters or fewer",
         "The commit message body or footer includes a 'BREAKING CHANGE:' note describing what changed",
         "Both the source file and the test file are staged into the commit",
-        "Staging commands in commit_log.md name specific files rather than using 'git add .' or 'git add -A'"
+        "Staging commands in commit_log.md name specific files rather than using 'git add .' or 'git add -A'",
+        "The commit message ends with a 'Co-Authored-By:' trailer that names a specific model (e.g. 'Claude Sonnet 4.6 <noreply@anthropic.com>'), not merely 'Claude'"
       ]
     },
     {
