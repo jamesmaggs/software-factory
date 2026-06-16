@@ -16,6 +16,11 @@
       "description": "Stage and commit changes using Conventional Commits."
     },
     {
+      "name": "six-thinking-hats",
+      "source": "./skills/six-thinking-hats",
+      "description": "Review or stress-test an idea from six parallel perspectives (de Bono's Six Thinking Hats)."
+    },
+    {
       "name": "skill-evaluator",
       "source": "./skills/skill-evaluator",
       "description": "Judge a skill's quality and measure its value against a no-skill baseline."
