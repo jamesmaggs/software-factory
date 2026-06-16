@@ -37,16 +37,12 @@ rubric:
   misfire on near-misses or lose to a competing skill.
 
 Produce concrete strengths and weaknesses with line-level examples, not a bare
-score. **Be explicit that this step measures form and quality, not effectiveness.**
-A skill can read beautifully and still do nothing.
-
-Whenever form is clean but the content is thin or padded, say so plainly: a skill
-that passes the linter can still be bloated or dead weight. Do not let a clean
-mechanical pass stand in for a quality verdict — naming that gap is one of the most
-useful things this review produces. State this even when you could not run
-skill-linter: say whether the skill would *likely* pass mechanical checks, and that
-passing them is not the same as being good. The form≠value point does not depend on
-having run the linter.
+score. **This step measures form, not effectiveness — a skill can read beautifully,
+pass every mechanical check, and still do nothing.** Say so plainly when form is
+clean but the content is thin or padded; naming that gap is one of the most useful
+things this review produces. This holds even when you could not run skill-linter —
+note whether the skill would *likely* pass mechanical checks, and that passing them
+is not the same as being good.
 
 ## Step 2 — Measure value against baseline
 
