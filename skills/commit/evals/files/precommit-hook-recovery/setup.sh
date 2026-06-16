@@ -25,7 +25,7 @@ cat > .git/hooks/pre-commit << 'HOOKEOF'
 # Reject commits if any staged Python file has trailing whitespace
 files=$(git diff --cached --name-only | grep '\.py$')
 if [ -n "$files" ]; then
-    if echo "$files" | xargs grep -lP '\s+$' 2>/dev/null; then
+    if echo "$files" | xargs grep -lE '[[:space:]]+$' 2>/dev/null; then
         echo "ERROR: Trailing whitespace found in staged Python files. Please fix before committing."
         exit 1
     fi
