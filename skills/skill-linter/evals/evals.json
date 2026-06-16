@@ -8,7 +8,7 @@
       "expected_output": "Reports the linter's structured verdict with error/warning counts and an overall FAIL, calling out the planted violations.",
       "files": ["evals/files/broken-skill"],
       "expectations": [
-        "Reports the linter's structured verdict with explicit error and warning counts and a checks-passed total (e.g. '2 errors, 5 warnings, 10/17 checks passed'), not just a prose opinion",
+        "Reports the linter's structured verdict with explicit error and warning counts and a checks-passed total (e.g. '3 errors, 5 warnings, 10/18 checks passed'), not just a prose opinion",
         "Flags the name as invalid on both counts: disallowed characters AND the reserved word 'claude'",
         "Flags that references are not one level deep (references/deep.md links onward to a file SKILL.md never references)",
         "Concludes do-not-publish because hard errors, not only warnings, are present"
