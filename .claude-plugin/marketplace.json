@@ -16,6 +16,11 @@
       "description": "Stage and commit changes using Conventional Commits."
     },
     {
+      "name": "skill-evaluator",
+      "source": "./skills/skill-evaluator",
+      "description": "Judge a skill's quality and measure its value against a no-skill baseline."
+    },
+    {
       "name": "skill-linter",
       "source": "./skills/skill-linter",
       "description": "Deterministically lint a SKILL.md against the Agent Skills spec."
