@@ -20,6 +20,9 @@ skills/<skill>/
   portable, not Claude-specific.
 - When adding, renaming, or removing a skill, keep the [README](./README.md)
   Skills table in sync.
+- A `SKILL.md` is runtime instruction, not a changelog. Keep it imperative — no
+  rationale, justification, or "why we did it" commentary. Record the reasoning
+  in the commit message or an ADR.
 - Commit with Conventional Commits; prefer small, atomic commits.
 
 ## Skill linting
