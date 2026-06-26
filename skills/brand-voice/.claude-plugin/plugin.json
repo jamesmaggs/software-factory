@@ -1,0 +1,10 @@
+{
+  "name": "brand-voice",
+  "description": "Establish a brand's voice and tone through a structured interview, output as a fixed-schema guide.",
+  "version": "0.1.0",
+  "author": {
+    "name": "James Maggs"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/jamesmaggs/software-factory"
+}
