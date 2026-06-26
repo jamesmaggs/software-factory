@@ -19,10 +19,12 @@ skills/<skill>/
 - Keep each `SKILL.md` compliant with the Agent Skills spec — skills must stay
   portable, not Claude-specific.
 - When adding, renaming, or removing a skill, keep the [README](./README.md)
-  Skills table in sync.
-- A `SKILL.md` is runtime instruction, not a changelog. Keep it imperative — no
-  rationale, justification, or "why we did it" commentary. Record the reasoning
-  in the commit message or an ADR.
+  Skills table in sync. Keep the skills in this table in alphabetical order.
+- A `SKILL.md` is runtime instruction, not a changelog. Keep it imperative —
+  no rationale, justification, or "why we did it" commentary. Be ruthless.
+  Would removing content change what the executing agent does? If no, it's
+  commentary — cut it. If yes, keep it, but phrase it as the directive, not
+  the reason. Record the reasoning in the commit message.
 - Commit with Conventional Commits; prefer small, atomic commits.
 
 ## Skill linting
