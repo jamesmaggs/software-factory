@@ -79,7 +79,6 @@ BEGIN{
     if(sec ~ /^The Voice/) voiceseen=1
     next
   }
-  if(sec ~ /^The Voice/ && line ~ /\*\*Why this voice:\*\*/) why=1
   # capture first table per section
   if(sec!="" && line ~ /^[ \t]*\|/ && tabledone[sec]==0){
     rowcount[sec]++; rows[sec,rowcount[sec]]=line
@@ -91,7 +90,6 @@ BEGIN{
 END{
   if(!has_h1) err("Missing H1 heading \"# Brand Voice Guide: <name>\".")
   if(!voiceseen) err("Missing required section \"## The Voice: <label>\".")
-  else if(!why) err("Section \"The Voice\" is missing the \"**Why this voice:**\" line.")
   split("Tone of Voice Dimensions|Brand Voice Chart|Sample Copy", req, "|")
   for(i=1;i<=3;i++) if(!(req[i] in secseen)) err("Missing required section \"## " req[i] "\".")
 

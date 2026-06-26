@@ -9,7 +9,7 @@ Establish a brand's voice through a short interview, a candidate pick, and a fix
 
 ## Step 1: Discovery interview
 
-Talk conversationally, in the user's own words — free text, not multiple-choice. Ask one or two questions at a time and follow up; don't recite a checklist. Cover, broad to specific:
+Talk conversationally, in the user's own words — free text, not multiple-choice. Ask one question at a time and follow up; don't recite a checklist. Cover, broad to specific:
 
 - What the product does and for whom; the emotional state the audience arrives in versus how you want them to feel.
 - 2-3 admired brands and *what specifically* each does well, plus one "absolute no".
@@ -36,6 +36,6 @@ Fill `assets/voice_doc_template.md`, keeping the headings, tables, and scale exa
 - **Dimensions**: score each row against its own poles (1 = left label, 5 = right). The **Position** column names the pole in words and is the source of truth; make the number agree. A near-pole score is fine — don't drift toward the middle to look balanced.
 - **Voice chart**: 3-5 traits, each with concrete copy-level do's and don'ts; fold hard never-say items into the don'ts.
 - **Tone shifts**: express each as a delta against the default, in the form `Dimension: default → shifted`.
-- Justify every score and do/don't from the interview, not by assertion.
+- Ground every score and do/don't in what the user actually said, not invention. The guide states the voice — never the case for choosing it. No "why this voice", no derivation note, no commentary.
 
-Save the guide to `docs/design/brand-voice-guide.md` under the project root, creating the directory if it doesn't exist. Then run `bash scripts/lint_voice_guide.sh <path>` and fix every error before telling the user it's ready. Keep the closing message short.
+Save the guide to `docs/design/brand-voice-guide.md` under the project root, creating the directory if it doesn't exist. Then run `bash scripts/lint_voice_guide.sh <path>` and fix every error before telling the user it's ready.

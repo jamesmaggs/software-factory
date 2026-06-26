@@ -1,12 +1,8 @@
 # Brand Voice Guide: [Brand/Product Name]
 
-*Derived from a structured interview and a side-by-side choice between [N] candidate voices on [date].*
-
 ## The Voice: [Chosen Voice Label]
 
 [One-line personality description.]
-
-**Why this voice:** [2-4 sentences tying the choice to specific interview answers and what the user said when they picked it — e.g. "reflects the stated admiration for [competitor]'s directness, and the user singled out its plain handling of bad news."]
 
 ## Tone of Voice Dimensions
 
@@ -57,7 +53,3 @@ Each sample written in the chosen voice, at its default tone.
 
 **Onboarding email opener:**
 > [Sample]
-
-## Other Directions Considered
-
-[Optional. 1-2 sentences on a runner-up candidate the user liked and when it might still be worth reaching for — e.g. for a specific audience segment or channel. Omit this section if no other candidate is worth noting.]
